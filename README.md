@@ -16,7 +16,7 @@ fun AndroidUsbCamera(usbDevice: UsbDevice?, modifier: Modifier = Modifier) {
     if (usbDevice == null) return
     val context = LocalContext.current
     val surfaceView = remember { SurfaceView(context) }
-    DisposableEffect(Unit) {
+    DisposableEffect(usbDevice) {
         val mCameraHelper = CameraHelper()
         mCameraHelper.setStateCallback(object : ICameraHelper.StateCallback {
             override fun onAttach(device: UsbDevice?) {}
@@ -51,8 +51,8 @@ fun AndroidUsbCameraDemo(modifier: Modifier = Modifier) {
     DisposableEffect(Unit) {
         //
         fun setUsbDevice() {
-            Log.d("TAG", "deviceList: ${mCameraHelper.deviceList.map { it.deviceName }}")
-            usbDevice = mCameraHelper.deviceList.getOrNull(1)
+            val deviceList = mCameraHelper.deviceList.filter { it.productName == "USB Video" }
+            usbDevice = deviceList.getOrNull(0)
         }
 
 
