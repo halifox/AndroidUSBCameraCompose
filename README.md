@@ -1,3 +1,5 @@
+# 不要使用这个库 这个库在息屏后重新亮屏 无法获取最新的usb设备和预览
+
 # Android USB Camera & Jetpack Compose 示例
 
 本项目展示了如何在 Android Jetpack Compose 中集成并使用 [AndroidUSBCamera](https://github.com/jiangdongguo/AndroidUSBCamera) 库，以实现 USB 摄像头接入功能。
