@@ -1,36 +1,16 @@
-package com.github.auvc
+# Android USB Camera & Jetpack Compose 示例
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.hardware.usb.UsbDevice
-import android.os.Bundle
-import android.util.Log
-import android.view.SurfaceView
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.viewinterop.AndroidView
-import com.github.auvc.ui.theme.AndroidUSBCameraCompose2Theme
-import com.herohan.uvcapp.CameraHelper
-import com.herohan.uvcapp.ICameraHelper
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+## 快速接入并使用
 
+1. 在 build.gradle 中添加依赖：
 
+```kotlin
+    implementation("com.herohan:UVCAndroid:1.0.9")
+```
+
+2. 使用
+
+```kotlin
 @Composable
 fun AndroidUsbCamera(usbDevice: UsbDevice?, modifier: Modifier = Modifier) {
     if (usbDevice == null) return
@@ -58,7 +38,11 @@ fun AndroidUsbCamera(usbDevice: UsbDevice?, modifier: Modifier = Modifier) {
     }
     AndroidView({ surfaceView }, modifier)
 }
+```
 
+## 示例
+
+```kotlin
 @Composable
 fun AndroidUsbCameraDemo(modifier: Modifier = Modifier) {
     val context = LocalContext.current
@@ -92,19 +76,10 @@ fun AndroidUsbCameraDemo(modifier: Modifier = Modifier) {
     }
     AndroidUsbCamera(usbDevice, modifier)
 }
+```
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AndroidUSBCameraCompose2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AndroidUsbCameraDemo()
-                }
-            }
-        }
-    }
-}
+## 资源
 
+- [shiyinghan/UVCAndroid](https://github.com/shiyinghan/UVCAndroid)
+- [UVCAndroid，安卓UVC相机通用开发库（支持多预览和多摄像头）](https://blog.csdn.net/hanshiying007/article/details/124118486)
+- [Android相机调用-libusbCamera【外接摄像头】【USB摄像头】 【多摄像头预览】](https://blog.csdn.net/huahua520amy/article/details/136261508)
